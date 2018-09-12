@@ -4,6 +4,8 @@ package training.supportbank;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -27,6 +29,7 @@ public class Main {
 
         ArrayList<Transaction> finalList = new ArrayList<Transaction>();
 
+        transactionsList.remove(0);
 
 
         for (String line : transactionsList) {
@@ -35,17 +38,17 @@ public class Main {
 
             Transaction transaction = new Transaction();
 
-            transaction.date = lineSplit[0];
+            transaction.date = LocalDate.parse(lineSplit[0], DateTimeFormatter.ofPattern("dd/MM/yyyy"));
             transaction.from = lineSplit[1];
             transaction.to = lineSplit[2];
             transaction.narrative = lineSplit[3];
-            transaction.amount = lineSplit[4];
+            transaction.amount = Double.parseDouble(lineSplit[4]);
 
             finalList.add(transaction);
         }
 
         for (Transaction transaction : finalList) {
-            
+
         }
 
     }
