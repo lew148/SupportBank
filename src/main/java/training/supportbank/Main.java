@@ -1,5 +1,7 @@
 package training.supportbank;
 
+import com.sun.xml.internal.fastinfoset.util.StringArray;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -28,13 +30,12 @@ public class Main {
 
         //Loop to input value into Transaction instances
 
-        Integer listSize = transactionsList.size();
-        int counter = 1;
 
+        for (String line : transactionsList) {
+            //System.out.println(line);
+            String[] lineSplit = line.split(",");
 
-        while (counter < listSize) {
-        System.out.println(transactionsList.get(counter));
-            counter = counter + 1;
+            System.out.println(lineSplit[1]);
         }
 
     }
