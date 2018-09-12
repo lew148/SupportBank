@@ -79,7 +79,5 @@ public class Main {
             a.accountTransactions.add(transaction);
             a.amountDue = a.amountDue + transaction.amount;
         }
-
-        System.out.println(accountMap);
     }
 }
