@@ -1,10 +1,10 @@
 package training.supportbank;
 
-import com.sun.xml.internal.fastinfoset.util.StringArray;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -25,17 +25,27 @@ public class Main {
         }
         //
 
+        ArrayList<Transaction> finalList = new ArrayList<Transaction>();
 
-        System.out.println(transactionsList.get(1));
-
-        //Loop to input value into Transaction instances
 
 
         for (String line : transactionsList) {
-            //System.out.println(line);
+
             String[] lineSplit = line.split(",");
 
-            System.out.println(lineSplit[1]);
+            Transaction transaction = new Transaction();
+
+            transaction.date = lineSplit[0];
+            transaction.from = lineSplit[1];
+            transaction.to = lineSplit[2];
+            transaction.narrative = lineSplit[3];
+            transaction.amount = lineSplit[4];
+
+            finalList.add(transaction);
+        }
+
+        for (Transaction transaction : finalList) {
+            
         }
 
     }
