@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
@@ -47,9 +48,38 @@ public class Main {
             finalList.add(transaction);
         }
 
-        for (Transaction transaction : finalList) {
+        HashMap<String, Account> accountMap = new HashMap<>();
 
+
+
+        for (Transaction transaction : finalList) {
+            if (!accountMap.containsKey(transaction.from)) {
+                Account account = new Account();
+                account.name = transaction.from;
+                account.amountDue = 0.0;
+                account.amountOwed = 0.0;
+                accountMap.put(transaction.from, account);
+            }
+
+            Account a = accountMap.get(transaction.from);
+            a.accountTransactions.add(transaction);
+            a.amountOwed = a.amountOwed + transaction.amount;
         }
 
+        for (Transaction transaction : finalList) {
+            if (!accountMap.containsKey(transaction.to)) {
+                Account account = new Account();
+                account.name = transaction.to;
+                account.amountDue = 0.0;
+                account.amountOwed = 0.0;
+                accountMap.put(transaction.to, account);
+            }
+
+            Account a = accountMap.get(transaction.to);
+            a.accountTransactions.add(transaction);
+            a.amountDue = a.amountDue + transaction.amount;
+        }
+
+        System.out.println(accountMap);
     }
 }
