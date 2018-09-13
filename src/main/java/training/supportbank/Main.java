@@ -4,6 +4,7 @@ package training.supportbank;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -31,7 +32,8 @@ public class Main {
 
             // "Error" will be displayed if an exception is caught (csv file cannot be found or is corrupted)
         } catch (IOException e) {
-            System.out.println("Error");
+            System.out.println("Error! File does not exist.");
+            logger.error("Suggested file does not exist");
         }
 
 
@@ -42,6 +44,9 @@ public class Main {
         // first line of the ArrayList is removed as this is invalid data, used as headings
         rawDataList.remove(0);
 
+
+        // counter made to count the line number of the csv file, during the for loop below
+        int counter = 2;
 
         // each line in the data list is read and instances of transactions are created and assigned the correct variables.
         // the instances are then added to the ArrayList
@@ -54,15 +59,43 @@ public class Main {
             Transaction transaction = new Transaction();
 
             // each line of the string array ([0], [1], etc.) is assigned to the correct variable of the created instance
-            transaction.date = LocalDate.parse(lineSplit[0], DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-            transaction.from = lineSplit[1];
-            transaction.to = lineSplit[2];
-            transaction.narrative = lineSplit[3];
-            transaction.amount = Double.parseDouble(lineSplit[4]);
-
+            // try/catch allows for the easy location of possible invalidity of data, from the csv file
+            try {
+                transaction.date = LocalDate.parse(lineSplit[0], DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            } catch(Exception e) {
+                logger.error("The 'date' inputted on line " + counter + ", of csv file, is invalid");
+                throw e;
+            }
+            try {
+                transaction.from = lineSplit[1];
+            } catch(Exception e) {
+                logger.error("The 'from' name inputted on line " + counter + ", of csv file, is invalid");
+                throw e;
+            }
+            try {
+                transaction.to = lineSplit[2];
+            } catch(Exception e) {
+                logger.error("The 'to' name inputted on line " + counter + ", of csv file, is invalid");
+                throw e;
+            }
+            try {
+                transaction.narrative = lineSplit[3];
+            } catch(Exception e) {
+                logger.error("The 'narrative' inputted on line " + counter + ", of csv file, is invalid");
+                throw e;
+            }
+            try {
+                transaction.amount = Double.parseDouble(lineSplit[4]);
+            } catch (Exception e) {
+                logger.error("The 'amount' inputted on line " + counter + ", of csv file, is invalid");
+                throw e;
+            }
 
             //the created transaction instance is added to the list of transaction instances
             transactionList.add(transaction);
+
+            // counter increases, to match current csv file number
+            counter++;
         }
 
 
