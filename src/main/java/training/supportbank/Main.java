@@ -1,6 +1,9 @@
 package training.supportbank;
 
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -12,9 +15,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
+
+    private static final Logger logger = LogManager.getLogger();
+
     public static void main(String args[]) {
-
-
         // ArrayList is created, to hold the raw data, line by line
         List<String> rawDataList = null;
 
@@ -23,7 +27,7 @@ public class Main {
         try {
 
             // csv file is imported, read line-by-line and added to list in the same fashion
-            rawDataList = Files.readAllLines(Paths.get("C:\\Work\\Training\\SupportBank\\Transactions2014.csv"));
+            rawDataList = Files.readAllLines(Paths.get("C:\\Work\\Training\\SupportBank\\DodgyTransactions2015.csv"));
 
             // "Error" will be displayed if an exception is caught (csv file cannot be found or is corrupted)
         } catch (IOException e) {
