@@ -13,10 +13,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String args[]) {
-        //Scanner scanner = new Scanner(System.in);
-        //while (scanner.hasNextLine()) {
-        //    String userInput = scanner.nextLine();
-        //}
+
 
         // ArrayList is created, to hold the raw data, line by line
         List<String> rawDataList = null;
@@ -130,7 +127,32 @@ public class Main {
             a.amountDue = a.amountDue + transaction.amount;
         }
 
-        System.out.println(accountList);
+
+        // prints all account 'names' to screen for user review
+        System.out.println("Here is a list of all Accounts: ");
+        for (Account account : accountList) {
+            account.printName();
+        }
+
+
+        // takes user input and stores it in a string variable, userInput
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("List (\"All\" or [Account]): ");
+        String userInput = scanner.nextLine();
+
+
+
+        if (userInput.toLowerCase().equals("all")) {
+            for (Account account : accountList) {
+                account.printOweDue();
+            }
+        } else {
+            for (Transaction transaction : accountMap.get(userInput).accountTransactions) {
+                transaction.printTransaction();
+            }
+        }
+
+
     }
 
 }

@@ -13,9 +13,12 @@ public class Account {
     public List<Transaction> accountTransactions = new ArrayList<>();
 
 
+    public void printOweDue() {
+        String OweDue = this.name + " owes £" + Double.toString(this.amountOwed) + " and is due £" + Double.toString(this.amountDue) + "!";
+        System.out.println(OweDue);
+    }
 
-    public String getProfile() {
-        String profile = this.name + " owes £" + Double.toString(this.amountOwed) + " and is due £" + Double.toString(this.amountDue) + "!";
-        return profile;
+    public void printName() {
+        System.out.println(this.name);
     }
 }
