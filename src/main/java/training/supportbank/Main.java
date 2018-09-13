@@ -68,6 +68,8 @@ public class Main {
         // HashMap that links a name to the corresponding instance of account (E.g. "Sarah T" --> *Sarah's account instance*)
         HashMap<String, Account> accountMap = new HashMap<>();
 
+        // created new array list for accounts
+        ArrayList<Account> accountList = new ArrayList<>();
 
         // this loop deals with the 'from' cells in the ArrayList and, if it doesn't already exist,
         // creates a new key and value ('name' and corresponding account instance) link in the HashMap
@@ -83,6 +85,9 @@ public class Main {
                 account.name = transaction.from;
                 account.amountDue = 0.0;
                 account.amountOwed = 0.0;
+
+                // add new account instance to the list of accounts
+                accountList.add(account);
 
                 // adds 'name' --> created account instance link to HashMap (E.g. "Sarah T" --> *Sarah's account instance*)
                 accountMap.put(transaction.from, account);
@@ -111,6 +116,9 @@ public class Main {
                 account.amountDue = 0.0;
                 account.amountOwed = 0.0;
 
+                // add new account instance to the list of accounts
+                accountList.add(account);
+
                 // adds 'name' --> created account instance link to HashMap (E.g. "Sarah T" --> *Sarah's account instance*)
                 accountMap.put(transaction.to, account);
             }
@@ -122,6 +130,7 @@ public class Main {
             a.amountDue = a.amountDue + transaction.amount;
         }
 
-        System.out.println();
+        System.out.println(accountList);
     }
+
 }
