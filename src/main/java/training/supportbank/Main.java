@@ -199,6 +199,7 @@ public class Main {
             } catch(Exception e) {
                 logger.error("Inputted string: \'" + userInput + "\' is invalid or incorrect! Please try again.");
                 System.out.println("Inputted string: \'" + userInput + "\' is invalid or incorrect!");
+                throw e;
             }
         }
     }
