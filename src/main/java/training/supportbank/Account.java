@@ -13,10 +13,12 @@ public class Account {
     //list of transactions for the specific account instance is created upon instance creation
     public List<Transaction> accountTransactions = new ArrayList<>();
 
+    // creates decimal format to be used in string
     DecimalFormat df = new DecimalFormat("###########0.00");
 
     // prints string giving name, amount owed and amount due of person's account
     public void printOweDue() {
+        // doubles are formatted in monetary fashion (e.g £4.00005 --> £4.00)
         String OweDue = this.name + " owes £" + df.format(this.amountOwed) + " and is due £" + df.format(this.amountDue) + "!";
         System.out.println(OweDue);
     }
