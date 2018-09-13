@@ -13,11 +13,13 @@ public class Account {
     public List<Transaction> accountTransactions = new ArrayList<>();
 
 
+    // prints string giving name, amount owed and amount due of person's account
     public void printOweDue() {
-        String OweDue = this.name + " owes £" + Double.toString(this.amountOwed) + " and is due £" + Double.toString(this.amountDue) + "!";
+        String OweDue = this.name + " owes £" + this.amountOwed + " and is due £" + this.amountDue + "!";
         System.out.println(OweDue);
     }
 
+    // prints account name
     public void printName() {
         System.out.println(this.name);
     }

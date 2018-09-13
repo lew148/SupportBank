@@ -141,7 +141,8 @@ public class Main {
         String userInput = scanner.nextLine();
 
 
-
+        // if the user inputs "all" or "All", program will print a list of each person, how much they owe and how much they're due
+        // if anything else, x, is inputted, x is found within the account map and all transactions, and it's details are printed
         if (userInput.toLowerCase().equals("all")) {
             for (Account account : accountList) {
                 account.printOweDue();
@@ -151,8 +152,5 @@ public class Main {
                 transaction.printTransaction();
             }
         }
-
-
     }
-
 }
