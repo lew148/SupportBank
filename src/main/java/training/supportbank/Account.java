@@ -8,5 +8,7 @@ public class Account {
     public Double amountOwed;
     public Double amountDue;
 
+
+    //list of transactions for the specific account instance is created upon instance creation
     public List<Transaction> accountTransactions = new ArrayList<>();
 }

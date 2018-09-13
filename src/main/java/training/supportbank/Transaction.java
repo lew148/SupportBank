@@ -1,7 +1,6 @@
 package training.supportbank;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class Transaction {
     public LocalDate date;
