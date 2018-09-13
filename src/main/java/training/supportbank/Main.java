@@ -28,7 +28,7 @@ public class Main {
         try {
 
             // csv file is imported, read line-by-line and added to list in the same fashion
-            rawDataList = Files.readAllLines(Paths.get("C:\\Work\\Training\\SupportBank\\DodgyTransactions2015.csv"));
+            rawDataList = Files.readAllLines(Paths.get("C:\\Work\\Training\\SupportBank\\Transactions2014.csv"));
 
             // "Error" will be displayed if an exception is caught (csv file cannot be found or is corrupted)
         } catch (IOException e) {
@@ -64,30 +64,35 @@ public class Main {
                 transaction.date = LocalDate.parse(lineSplit[0], DateTimeFormatter.ofPattern("dd/MM/yyyy"));
             } catch(Exception e) {
                 logger.error("The 'date' inputted on line " + counter + ", of csv file, is invalid");
+                System.out.println("The 'date' inputted on line " + counter + ", of csv file, is invalid");
                 throw e;
             }
             try {
                 transaction.from = lineSplit[1];
             } catch(Exception e) {
                 logger.error("The 'from' name inputted on line " + counter + ", of csv file, is invalid");
+                System.out.println("The 'from' name inputted on line " + counter + ", of csv file, is invalid");
                 throw e;
             }
             try {
                 transaction.to = lineSplit[2];
             } catch(Exception e) {
                 logger.error("The 'to' name inputted on line " + counter + ", of csv file, is invalid");
+                System.out.println("The 'to' name inputted on line " + counter + ", of csv file, is invalid");
                 throw e;
             }
             try {
                 transaction.narrative = lineSplit[3];
             } catch(Exception e) {
                 logger.error("The 'narrative' inputted on line " + counter + ", of csv file, is invalid");
+                System.out.println("The 'narrative' inputted on line " + counter + ", of csv file, is invalid");
                 throw e;
             }
             try {
                 transaction.amount = Double.parseDouble(lineSplit[4]);
             } catch (Exception e) {
                 logger.error("The 'amount' inputted on line " + counter + ", of csv file, is invalid");
+                System.out.println("The 'amount' inputted on line " + counter + ", of csv file, is invalid");
                 throw e;
             }
 
@@ -174,7 +179,7 @@ public class Main {
 
         // takes user input and stores it in a string variable, userInput
         Scanner scanner = new Scanner(System.in);
-        System.out.println("List (\"All\" or [Account]): ");
+        System.out.println("List All or [Account Name] (Account Name is Case Sensitive): ");
         String userInput = scanner.nextLine();
 
 
@@ -185,8 +190,15 @@ public class Main {
                 account.printOweDue();
             }
         } else {
-            for (Transaction transaction : accountMap.get(userInput).accountTransactions) {
-                transaction.printTransaction();
+
+            // try/catch to highlight possible invalid data input, from user
+            try {
+                for (Transaction transaction : accountMap.get(userInput).accountTransactions) {
+                    transaction.printTransaction();
+                }
+            } catch(Exception e) {
+                logger.error("Inputted string: \'" + userInput + "\' is invalid or incorrect! Please try again.");
+                System.out.println("Inputted string: \'" + userInput + "\' is invalid or incorrect!");
             }
         }
     }
