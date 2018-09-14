@@ -100,6 +100,12 @@ public class Read {
         }
     }
 
+
+    public void readJSON(String file) {
+
+    }
+
+
     public ArrayList getTransactionList() {
         return transactionList;
     }

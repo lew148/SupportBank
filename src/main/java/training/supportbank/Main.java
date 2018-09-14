@@ -4,15 +4,9 @@ package training.supportbank;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -26,8 +20,8 @@ public class Main {
 
 
         // inputs CSV file path into the method: readCSV
-        read.readCSV("C:\\Work\\Training\\SupportBank\\Transactions2014.csv");
-
+        //read.readCSV("C:\\Work\\Training\\SupportBank\\Transactions2014.csv");
+        read.readJSON("C:\\Work\\Training\\SupportBank\\Transactions2013.json");
 
         // creates an array list in Main that is set as equal to that which was created in the readCSV method
         ArrayList<Transaction> transactionList;
