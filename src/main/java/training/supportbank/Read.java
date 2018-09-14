@@ -16,6 +16,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.w3c.dom.*;
+import javax.xml.parsers.*;
+import java.io.*;
+
+
 public class Read {
     private static final Logger logger = LogManager.getLogger();
 
@@ -23,6 +28,10 @@ public class Read {
     ArrayList<Transaction> transactionList = new ArrayList<>();
 
 
+
+
+
+//CSV Reading
     public void readCSV(String file) {
         // ArrayList is created, toAccount hold the raw data, line by line
         List<String> rawDataList = null;
@@ -106,6 +115,11 @@ public class Read {
     }
 
 
+
+
+
+
+    //JSON Reading
     private Gson buildGson() {
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.registerTypeAdapter(LocalDate.class, (JsonDeserializer<LocalDate>) (jsonElement, type, jsonDeserializationContext) ->
@@ -131,6 +145,67 @@ public class Read {
 
         transactionList.addAll(Arrays.asList(transactionArray));
     }
+
+
+
+
+
+
+    // XML Reading
+    public void readXML (String file) {
+        try {
+            String fileContents = readFile(file);
+
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = dbFactory.newDocumentBuilder();
+
+            StringBuilder xmlStringBuilder = new StringBuilder();
+            xmlStringBuilder.append(fileContents);
+            ByteArrayInputStream input = new ByteArrayInputStream(
+                    xmlStringBuilder.toString().getBytes("UTF-8"));
+            Document doc = builder.parse(input);
+
+            Element root = doc.getDocumentElement();
+
+            NodeList supportTransactionsList = root.getElementsByTagName("SupportTransaction");
+            for (int temp = 0; temp < supportTransactionsList.getLength(); temp++) {
+                Node nNode = supportTransactionsList.item(temp);
+                Element supportTransaction = (Element) supportTransactionsList.item(0);
+
+
+
+                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                    Element eElement = (Element) nNode;
+
+                    System.out.println("Description : "
+                            + eElement
+                            .getElementsByTagName("Description")
+                            .item(0)
+                            .getTextContent());
+                    System.out.println("Value : "
+                            + eElement
+                            .getElementsByTagName("Value")
+                            .item(0)
+                            .getTextContent());
+                    System.out.println("From : "
+                            + eElement
+                            .getElementsByTagName("From")
+                            .item(0)
+                            .getTextContent());
+                    System.out.println("To : "
+                            + eElement
+                            .getElementsByTagName("To")
+                            .item(0)
+                            .getTextContent());
+                    System.out.println();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
 
 

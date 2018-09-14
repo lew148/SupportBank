@@ -18,15 +18,16 @@ public class Main {
         // creates new instance of Read class, for use of functions within
         Read read = new Read();
 
-        // creates an array list in Main that is set as equal toAccount that which was created in the readCSV method
-        ArrayList<Transaction> transactionList;
-        transactionList = read.getTransactionList();
 
         // inputs CSV file path into the method: readCSV
         //read.readCSV("C:\\Work\\Training\\SupportBank\\Transactions2014.csv");
-        read.readJSON("C:\\Work\\Training\\SupportBank\\Transactions2013.json");
+        //read.readJSON("C:\\Work\\Training\\SupportBank\\Transactions2013.json");
+        read.readXML("C:\\Work\\Training\\SupportBank\\Transactions2012.xml");
 
 
+        // creates an array list in Main that is set as equal toAccount that which was created in the readCSV method
+        ArrayList<Transaction> transactionList;
+        transactionList = read.getTransactionList();
 
 
         // HashMap that links a name toAccount the corresponding instance of account (E.g. "Sarah T" --> *Sarah's account instance*)
@@ -128,7 +129,5 @@ public class Main {
                 throw e;
             }
         }
-
-        System.out.println();
     }
 }
