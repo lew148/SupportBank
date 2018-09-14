@@ -13,7 +13,7 @@ public class Account {
     //list of transactions for the specific account instance is created upon instance creation
     public List<Transaction> accountTransactions = new ArrayList<>();
 
-    // creates decimal format to be used in string
+    // creates decimal format toAccount be used in string
     DecimalFormat df = new DecimalFormat("###########0.00");
 
     // prints string giving name, amount owed and amount due of person's account

@@ -18,17 +18,18 @@ public class Main {
         // creates new instance of Read class, for use of functions within
         Read read = new Read();
 
+        // creates an array list in Main that is set as equal toAccount that which was created in the readCSV method
+        ArrayList<Transaction> transactionList;
+        transactionList = read.getTransactionList();
 
         // inputs CSV file path into the method: readCSV
         //read.readCSV("C:\\Work\\Training\\SupportBank\\Transactions2014.csv");
         read.readJSON("C:\\Work\\Training\\SupportBank\\Transactions2013.json");
 
-        // creates an array list in Main that is set as equal to that which was created in the readCSV method
-        ArrayList<Transaction> transactionList;
-        transactionList = read.getTransactionList();
 
 
-        // HashMap that links a name to the corresponding instance of account (E.g. "Sarah T" --> *Sarah's account instance*)
+
+        // HashMap that links a name toAccount the corresponding instance of account (E.g. "Sarah T" --> *Sarah's account instance*)
         HashMap<String, Account> accountMap = new HashMap<>();
 
         // created new array list for accounts
@@ -39,63 +40,63 @@ public class Main {
         // creates a new key and value ('name' and corresponding account instance) link in the HashMap
         for (Transaction transaction : transactionList) {
 
-            // if there is no existing account, linked to the 'current' 'from' string, one is created
-            if (!accountMap.containsKey(transaction.from)) {
+            // if there is no existing account, linked toAccount the 'current' 'from' string, one is created
+            if (!accountMap.containsKey(transaction.fromAccount)) {
 
                 // new account instance creation, as an existing one cannot be found
                 Account account = new Account();
 
                 // assignment of variables, within account instance, after it has been created
-                account.name = transaction.from;
+                account.name = transaction.fromAccount;
                 account.amountDue = 0.0;
                 account.amountOwed = 0.0;
 
-                // add new account instance to the list of accounts
+                // add new account instance toAccount the list of accounts
                 accountList.add(account);
 
-                // adds 'name' --> created account instance link to HashMap (E.g. "Sarah T" --> *Sarah's account instance*)
-                accountMap.put(transaction.from, account);
+                // adds 'name' --> created account instance link toAccount HashMap (E.g. "Sarah T" --> *Sarah's account instance*)
+                accountMap.put(transaction.fromAccount, account);
             }
 
-            // if an account does exist, the current transaction is added to the amountOwed variable that already exists
+            // if an account does exist, the current transaction is added toAccount the amountOwed variable that already exists
             // (This will assign an account with the sum of all owed money)
-            Account a = accountMap.get(transaction.from);
+            Account a = accountMap.get(transaction.fromAccount);
             a.accountTransactions.add(transaction);
             a.amountOwed = a.amountOwed + transaction.amount;
         }
 
 
-        // this loop deals with the 'to' cells in the ArrayList and, if it doesn't already exist,
+        // this loop deals with the 'toAccount' cells in the ArrayList and, if it doesn't already exist,
         // creates a new key and value ('name' and corresponding account instance) link in the HashMap
         for (Transaction transaction : transactionList) {
 
-            // if there is no existing account, linked to the 'current' 'to' string, one is created
-            if (!accountMap.containsKey(transaction.to)) {
+            // if there is no existing account, linked toAccount the 'current' 'toAccount' string, one is created
+            if (!accountMap.containsKey(transaction.toAccount)) {
 
                 // new account instance creation, as an existing one cannot be found
                 Account account = new Account();
 
                 // assignment of variables, within account instance, after it has been created
-                account.name = transaction.to;
+                account.name = transaction.toAccount;
                 account.amountDue = 0.0;
                 account.amountOwed = 0.0;
 
-                // add new account instance to the list of accounts
+                // add new account instance toAccount the list of accounts
                 accountList.add(account);
 
-                // adds 'name' --> created account instance link to HashMap (E.g. "Sarah T" --> *Sarah's account instance*)
-                accountMap.put(transaction.to, account);
+                // adds 'name' --> created account instance link toAccount HashMap (E.g. "Sarah T" --> *Sarah's account instance*)
+                accountMap.put(transaction.toAccount, account);
             }
 
-            // if an account does exist, the current transaction is added to the amountOwed variable that already exists
+            // if an account does exist, the current transaction is added toAccount the amountOwed variable that already exists
             // (This will assign an account with the sum of all owed money)
-            Account a = accountMap.get(transaction.to);
+            Account a = accountMap.get(transaction.toAccount);
             a.accountTransactions.add(transaction);
             a.amountDue = a.amountDue + transaction.amount;
         }
 
 
-        // prints all account 'names' to screen for user review
+        // prints all account 'names' toAccount screen for user review
         System.out.println("Here is a list of all Accounts: ");
         for (Account account : accountList) {
             account.printName();
@@ -116,7 +117,7 @@ public class Main {
             }
         } else {
 
-            // try/catch to highlight possible invalid data input, from user
+            // try/catch toAccount highlight possible invalid data input, from user
             try {
                 for (Transaction transaction : accountMap.get(userInput).accountTransactions) {
                     transaction.printTransaction();
@@ -127,5 +128,7 @@ public class Main {
                 throw e;
             }
         }
+
+        System.out.println();
     }
 }
