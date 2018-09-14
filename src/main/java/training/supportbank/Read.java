@@ -167,37 +167,39 @@ public class Read {
 
             Element root = doc.getDocumentElement();
 
+
             NodeList supportTransactionsList = root.getElementsByTagName("SupportTransaction");
             for (int temp = 0; temp < supportTransactionsList.getLength(); temp++) {
                 Node nNode = supportTransactionsList.item(temp);
-                Element supportTransaction = (Element) supportTransactionsList.item(0);
 
 
 
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                     Element eElement = (Element) nNode;
 
-                    System.out.println("Description : "
-                            + eElement
-                            .getElementsByTagName("Description")
+                    Transaction transaction = new Transaction();
+
+                    String dateAsString = eElement.getAttribute("Date");
+                    long dateAsLong = Long.parseLong(dateAsString);
+
+                    LocalDate firstJan1900 = LocalDate.parse("1900-01-01");
+                    LocalDate date = firstJan1900.plusDays(dateAsLong);
+
+                    transaction.date = date;
+
+                    transaction.narrative = (eElement.getElementsByTagName("Description")
                             .item(0)
                             .getTextContent());
-                    System.out.println("Value : "
-                            + eElement
-                            .getElementsByTagName("Value")
+                    transaction.amount = Double.parseDouble(eElement.getElementsByTagName("Value")
                             .item(0)
                             .getTextContent());
-                    System.out.println("From : "
-                            + eElement
-                            .getElementsByTagName("From")
+                    transaction.fromAccount = (eElement.getElementsByTagName("From")
                             .item(0)
                             .getTextContent());
-                    System.out.println("To : "
-                            + eElement
-                            .getElementsByTagName("To")
+                    transaction.toAccount = (eElement.getElementsByTagName("To")
                             .item(0)
                             .getTextContent());
-                    System.out.println();
+                    transactionList.add(transaction);
                 }
             }
         } catch (Exception e) {

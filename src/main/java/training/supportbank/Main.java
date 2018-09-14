@@ -20,9 +20,9 @@ public class Main {
 
 
         // inputs CSV file path into the method: readCSV
-        //read.readCSV("C:\\Work\\Training\\SupportBank\\Transactions2014.csv");
+        read.readCSV("C:\\Work\\Training\\SupportBank\\Transactions2014.csv");
         //read.readJSON("C:\\Work\\Training\\SupportBank\\Transactions2013.json");
-        read.readXML("C:\\Work\\Training\\SupportBank\\Transactions2012.xml");
+        //read.readXML("C:\\Work\\Training\\SupportBank\\Transactions2012.xml");
 
 
         // creates an array list in Main that is set as equal toAccount that which was created in the readCSV method

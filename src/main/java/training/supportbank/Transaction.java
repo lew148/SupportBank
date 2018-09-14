@@ -2,6 +2,7 @@ package training.supportbank;
 
 import java.text.DecimalFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Transaction {
     public LocalDate date;
@@ -17,7 +18,7 @@ public class Transaction {
         // creates decimal format toAccount be used in string
         DecimalFormat df = new DecimalFormat("###########0.00");
 
-        String transaction = "On " + this.date + " " + this.fromAccount + " borrowed £" + df.format(this.amount) + " from " + this.toAccount + " because of " + this.narrative + "!";
+        String transaction = "On " + this.date.format(DateTimeFormatter.ofPattern("E d MMM YYYY")) + " " + this.fromAccount + " borrowed £" + df.format(this.amount) + " from " + this.toAccount + " because of " + this.narrative + "!";
         System.out.println(transaction);
     }
 }
